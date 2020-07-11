@@ -6,24 +6,22 @@
 			<button @click="addItem">Dodaj</button>
 		</div>
 
-		<div
-			class="item"
-			v-bind:class="{
-				complited: item.completed,
-			}"
+		<TodoItem
 			v-for="item in items"
 			v-bind:key="item.id"
-		>
-			<h2>{{ item.title }}</h2>
-			<button v-if="!item.completed" @click="removeItem(item.id)">
-				Zrobione
-			</button>
-		</div>
+			v-bind:item="item"
+			@removeClicked="removeItem"
+		/>
 	</div>
 </template>
 
 <script>
+import TodoItem from "./TodoItem";
+
 export default {
+	components: {
+		TodoItem,
+	},
 	data() {
 		return {
 			newItem: "",
